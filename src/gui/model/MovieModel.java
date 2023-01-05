@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MovieModel {
@@ -35,8 +37,15 @@ public class MovieModel {
     public MovieModel() throws SQLException {
         movieManager = new MovieManager();
         moviesToBeViewed = FXCollections.observableArrayList();
-        if(movieManager.getAllMovie() != null)
-            moviesToBeViewed.addAll(movieManager.getAllMovie());
+        if(movieManager.getAllMovie() != null){
+            moviesToBeViewed.addAll(movieManager.getAllMovie());}
+        Comparator<Movie> movieComparator = new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        };
+        Collections.sort(moviesToBeViewed, movieComparator);
 
     }
 
