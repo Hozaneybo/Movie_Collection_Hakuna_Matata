@@ -1,55 +1,68 @@
 package be;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Movie {
     private int id;
-    private String name, filelink;
-    private Double rating;
-    private Date lastview;
+    private String name, fileLink;
+    private double personalRating, IMDBRating;
+    private Date lastView;
 
-    public Movie(int id, String name, Double rating, String filelink, Date lastview){
+    public Movie(int id, String name, String fileLink, double personalRating, double IMDBRating, Date lastView){
         this.id = id;
         this.name = name;
-        this.rating = rating;
-        this.filelink = filelink;
-        this.lastview = lastview;
+        this.fileLink = fileLink;
+        this.lastView = lastView;
+        this.personalRating = personalRating;
+        this.IMDBRating = IMDBRating;
     }
 
-    public Movie(){
-    }
-
-    public int getId(){
+    public int getId() {
         return id;
     }
-    public String getName(){
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Double getRating() {
-        return rating;
+    public String getFileLink() {
+        return fileLink;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
     }
 
-    public String getFilelink() {
-        return filelink;
+    public double getPersonalRating() {
+        return personalRating;
     }
 
-    public void setFilelink(String filelink) {
-        this.filelink = filelink;
+    public void setPersonalRating(double personalRating) {
+        this.personalRating = personalRating;
     }
 
-    public Date getLastview() {
-        return lastview;
+    public double getIMDBRating() {
+        return IMDBRating;
     }
 
-    public void setLastview(Date lastview) {
-        this.lastview = lastview;
+    public void setIMDBRating(double IMDBRating) {
+        this.IMDBRating = IMDBRating;
+    }
+
+    public Date getLastView() {
+        return lastView;
+    }
+
+    public void setLastView(Date lastView) {
+        this.lastView = lastView;
     }
 }

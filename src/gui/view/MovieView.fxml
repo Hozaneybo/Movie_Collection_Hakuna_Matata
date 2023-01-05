@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.controller.MovieViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="551.0" prefWidth="554.0" style="-fx-background-color: #191970; -fx-border-color: yellow;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MovieViewController">
+    <children>
+        <TableView fx:id="tableview" layoutX="6.0" layoutY="57.0" prefHeight="400.0" prefWidth="500.0" style="-fx-border-color: gold;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <columns>
+                <TableColumn fx:id="cNr" prefWidth="46.399967193603516" text="Nr." />
+                <TableColumn fx:id="cTitle" prefWidth="154.4000244140625" text="Title" />
+                <TableColumn fx:id="cRate" prefWidth="90.40000915527344" text=" My Rate" />
+                <TableColumn fx:id="cIMDBRate" prefWidth="85.5999755859375" text="IMDB Rate" />
+                <TableColumn fx:id="cLastview" prefWidth="138.39996337890625" text="Last View" />
+            </columns>
+        </TableView>
+        <TextField fx:id="serch" layoutX="49.0" layoutY="14.0" prefHeight="34.0" prefWidth="266.0" />
+        <Button layoutX="106.0" layoutY="511.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="26.0" prefWidth="59.0" text="Add" textFill="#2b2bae">
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font>
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant>
+                            <color>
+                                <Color red="0.38823530077934265" green="0.9921568632125854" blue="1.0" />
+                            </color>
+                        </Light.Distant>
+                    </light>
+                </Lighting>
+            </effect></Button>
+        <Button layoutX="209.0" layoutY="511.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" textFill="#2b2bae">
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant>
+                            <color>
+                                <Color red="0.38823530077934265" green="0.9921568632125854" blue="1.0" />
+                            </color>
+                        </Light.Distant>
+                    </light>
+                </Lighting>
+            </effect>
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font></Button>
+        <Button contentDisplay="CENTER" layoutX="411.0" layoutY="499.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="86.0" text="Play" textFill="#2b2bad">
+            <font>
+                <Font name="System Bold Italic" size="18.0" />
+            </font>
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant>
+                            <color>
+                                <Color red="0.38823530077934265" green="0.9921568632125854" blue="1.0" />
+                            </color>
+                        </Light.Distant>
+                    </light>
+                </Lighting>
+            </effect></Button>
+        <Label fx:id="lbl1" layoutX="21.0" layoutY="468.0" prefHeight="26.0" prefWidth="86.0" text="Label" />
+        <Label fx:id="lbl2" layoutX="121.0" layoutY="468.0" prefHeight="26.0" prefWidth="86.0" text="Label" />
+        <Label fx:id="lbl3" layoutX="243.0" layoutY="468.0" prefHeight="26.0" prefWidth="86.0" text="Label" />
+        <Label fx:id="lbl4" layoutX="369.0" layoutY="468.0" prefHeight="26.0" prefWidth="86.0" text="Label" />
+    </children>
 </AnchorPane>
