@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -25,7 +26,11 @@ import java.util.ResourceBundle;
 
 public class AddMovieController implements Initializable {
     @FXML
-    private ListView<Category> listOfCategory;
+    private TableView<Category> listOfCategory;
+
+    @FXML
+    private TableColumn<Category, String> cCategories;
+
 
     @FXML
     private TextField txtName, txtFilelink, txtRating;
@@ -48,6 +53,8 @@ public class AddMovieController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         listOfCategory.getItems().addAll(categoryModel.getObservableAllCategories());
+        cCategories.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
+        listOfCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     }
 
