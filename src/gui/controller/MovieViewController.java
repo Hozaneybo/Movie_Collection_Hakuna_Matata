@@ -76,7 +76,17 @@ public class MovieViewController implements Initializable {
                 }
             };
         });
+        serch.textProperty().addListener((observableValue, oldValue, newValue) ->
+        {
+            try {
+                movieModel.searchMovie(newValue);
+                refreshMovieTable();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
+
 
     public void addMovie(ActionEvent event) throws IOException {
 
@@ -100,7 +110,12 @@ public class MovieViewController implements Initializable {
         if(action.get() == ButtonType.OK)
         {
             movieModel.deleteMovie(selectedMovie);
+            refreshMovieTable();
         }
+    }
+    public void refreshMovieTable()
+    {
+        tableview.setItems(movieModel.getObservableAllMovies());
     }
 }
 

@@ -3,13 +3,14 @@ package bll;
 import be.Movie;
 import dal.Idal.IMovieDataAccess;
 import dal.db.MovieDAO;
+import dal.util.MovieSearcher;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
 public class MovieManager {
-
+    private MovieSearcher movieSercher = new MovieSearcher();
 
     IMovieDataAccess movieDAO_DB;
 
@@ -35,5 +36,9 @@ public class MovieManager {
     public void deleteMovie (Movie movie) throws Exception {
         movieDAO_DB.deleteMovie(movie);
     }
-
+    public List<Movie> searchMovies(String query) throws Exception {
+        List<Movie> allMovie = getAllMovie();
+        List<Movie> searchResult = movieSercher.search(allMovie, query);
+        return searchResult;
+    }
 }

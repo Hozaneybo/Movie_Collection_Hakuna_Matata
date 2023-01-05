@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MovieModel {
 
@@ -66,5 +67,9 @@ public class MovieModel {
         Movie movie = movieManager.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
         moviesToBeViewed.add(movie);
     }
-
+    public void searchMovie(String query) throws Exception {
+        List<Movie> searchResults = movieManager.searchMovies(query);
+        moviesToBeViewed.clear();
+        moviesToBeViewed.addAll(searchResults);
+    }
 }
