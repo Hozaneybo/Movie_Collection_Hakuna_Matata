@@ -13,7 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -24,7 +26,7 @@ import java.sql.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AddMovieController implements Initializable {
+public class AddMovieController extends ControllerManager implements Initializable {
     @FXML
     private TableView<Category> listOfCategory;
 
@@ -52,9 +54,7 @@ public class AddMovieController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        listOfCategory.getItems().addAll(categoryModel.getObservableAllCategories());
-        cCategories.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
-        listOfCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
 
     }
 
@@ -100,12 +100,24 @@ public class AddMovieController implements Initializable {
     }
 
     public void addCategory(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AddCategory.fxml"));
-        Parent root = loader.load();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Hahaha");
-        stage.show();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/view/AddCategory.fxml"));
+        AnchorPane pane = (AnchorPane) loader.load();
+
+        AddCategoryController addCategoryController = loader.getController();
+        addCategoryController.setModel(super.getModel());
+        showAllMoviesInTable();
+        addCategoryController.setup();
+
+
+        Stage dialogWindow = new Stage();
+        dialogWindow.setTitle("Add Song");
+        dialogWindow.initModality(Modality.WINDOW_MODAL);
+        dialogWindow.initOwner(((Node)event.getSource()).getScene().getWindow());
+        Scene scene = new Scene(pane);
+        dialogWindow.setScene(scene);
+
+        dialogWindow.showAndWait();
     }
 
     public void removeCategory(ActionEvent event) throws Exception {
@@ -120,6 +132,22 @@ public class AddMovieController implements Initializable {
         {
             categoryModel.deleteCategory(selectedCategory);
         }
+
+    }
+
+    @Override
+    public void setup() {
+        movieModel = getModel().getMovieModel();
+        categoryModel = getModel().getCategoryModel();
+        showAllMoviesInTable();
+
+    }
+    public void showAllMoviesInTable()
+    {
+
+        listOfCategory.setItems(categoryModel.getObservableAllCategories());
+        cCategories.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
+        listOfCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
     }
 }

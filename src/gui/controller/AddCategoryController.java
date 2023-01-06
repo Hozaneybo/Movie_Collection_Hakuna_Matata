@@ -10,15 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.sql.SQLException;
 
 
-public class AddCategoryController {
-
-    @FXML
-    private Button addButton;
-
-    @FXML
-    private Button cancelButton;
+public class AddCategoryController extends ControllerManager {
 
     @FXML
     private TextField nameField;
@@ -57,5 +52,14 @@ public class AddCategoryController {
     public void cancelSaving(ActionEvent event) {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    @Override
+    public void setup() {
+        try {
+            categoryModel = new CategoryModel();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
