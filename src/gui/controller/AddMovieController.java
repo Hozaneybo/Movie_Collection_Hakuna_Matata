@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -34,6 +36,9 @@ public class AddMovieController implements Initializable {
     private MovieModel movieModel;
     private CategoryModel categoryModel;
 
+    public String fileMusicPath = "movies";
+    private Path target = Paths.get(fileMusicPath);
+    MovieViewController movieViewController;
     public AddMovieController() {
         try {
             movieModel = new MovieModel();
@@ -60,15 +65,15 @@ public class AddMovieController implements Initializable {
         double IMDBRating = Double.parseDouble(txtRating.getText());
         Date lastView = new Date(1234567890123L);
 
-        try {
-            //Calls a method from the SongModel
+        try
+        {
+            Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
             movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
 
         } catch (Exception e) {
             e.printStackTrace();
             //throw new RuntimeException(e);
         }
-        //Closes the window
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -113,6 +118,5 @@ public class AddMovieController implements Initializable {
         {
             categoryModel.deleteCategory(selectedCategory);
         }
-
     }
 }

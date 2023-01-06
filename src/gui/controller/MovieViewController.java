@@ -11,11 +11,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -42,7 +48,13 @@ public class MovieViewController implements Initializable {
     private TableView<Movie> tableview;
 
     private MovieModel movieModel;
+    private MediaPlayer mediaPlayer;
+    private ArrayList<File> movies;
+    private File directory;
 
+    private int songNumber;
+
+    private Media media;
     public MovieViewController() {
         try {
             movieModel = new MovieModel();
@@ -57,6 +69,9 @@ public class MovieViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        movies = new ArrayList<>();
+        directory = new File("lib/movies");
+
 
         tableview.getItems().addAll(movieModel.getObservableAllMovies());
         cTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
@@ -86,6 +101,15 @@ public class MovieViewController implements Initializable {
             }
         });
     }
+
+    public void tblMoviesClicked(javafx.scene.input.MouseEvent mouseEvent) {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            if (mouseEvent.getClickCount() == 2) {
+
+            }
+        }
+    }
+
 
 
     public void addMovie(ActionEvent event) throws IOException {
