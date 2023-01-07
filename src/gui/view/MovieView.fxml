@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="551.0" prefWidth="554.0" style="-fx-background-color: #191970; -fx-border-color: yellow;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MovieViewController">
+<AnchorPane prefHeight="551.0" prefWidth="554.0" style="-fx-border-color: #08298A;" stylesheets="@../../CSS/scratch.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MovieViewController">
     <children>
         <TableView fx:id="tableview" layoutX="6.0" layoutY="57.0" onMouseClicked="#tblMoviesClicked" prefHeight="400.0" prefWidth="500.0" style="-fx-border-color: gold;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
             <columns>
@@ -17,8 +17,8 @@
                 <TableColumn fx:id="cLastview" prefWidth="138.39996337890625" text="Last View" />
             </columns>
         </TableView>
-        <TextField fx:id="serch" layoutX="49.0" layoutY="14.0" prefHeight="34.0" prefWidth="266.0" />
-        <Button layoutX="106.0" layoutY="511.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="26.0" prefWidth="59.0" text="Add" textFill="#2b2bae">
+        <TextField fx:id="serch" layoutX="21.0" layoutY="16.0" prefHeight="32.0" prefWidth="204.0" />
+        <Button layoutX="131.0" layoutY="505.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="39.0" prefWidth="67.0" text="Add" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font>
@@ -36,7 +36,7 @@
                     </light>
                 </Lighting>
             </effect></Button>
-        <Button layoutX="209.0" layoutY="511.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" textFill="#2b2bae">
+        <Button layoutX="244.0" layoutY="505.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="39.0" prefWidth="67.0" text="Remove" textFill="WHITE">
             <effect>
                 <Lighting>
                     <bumpInput>
@@ -54,7 +54,7 @@
             <font>
                 <Font name="System Bold Italic" size="13.0" />
             </font></Button>
-        <Button contentDisplay="CENTER" layoutX="411.0" layoutY="499.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="86.0" text="Play" textFill="#2b2bad">
+        <Button contentDisplay="CENTER" layoutX="357.0" layoutY="505.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="67.0" text="Play" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="18.0" />
             </font>
