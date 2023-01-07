@@ -2,6 +2,25 @@
     -fx-background-color: linear-gradient(to bottom, #071625, #1D3954);
     -fx-text-background-color: #FFFFFF;
 }
+.dialog-pane{
+    -fx-border-color:#0C2643;
+    -fx-border-width:2.0px;
+}
+.dialog-pane .header-panel {
+    -fx-background-color: #0C2643;
+}
+.dialog-pane .button:hover{
+    -fx-background-color: #5A83B1;
+    -fx-text-fill:white;
+    -fx-font-weight:bold;
+}
+
+.dialog-pane .button{
+    -fx-text-fill:white;
+    -fx-wrap-text: true;
+    -fx-effect: dropshadow( three-pass-box, white, 10.0, 0.0, 0.0, 0.0);
+    -fx-cursor:hand;
+}
 
 .button {
     -fx-background-color: #0C2643;

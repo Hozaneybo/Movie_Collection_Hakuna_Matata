@@ -8,22 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.stage.Modality;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -61,8 +54,6 @@ public class MovieViewController extends ControllerManager implements Initializa
     private MediaPlayer mediaPlayer;
     private ArrayList<File> movies;
     private File directory;
-
-
     private int songNumber;
 
     private Media media;
@@ -80,7 +71,7 @@ public class MovieViewController extends ControllerManager implements Initializa
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         movies = new ArrayList<>();
-        directory = new File("lib/movies");
+        directory = new File("movies");
 
 
 
@@ -178,7 +169,5 @@ public class MovieViewController extends ControllerManager implements Initializa
                 }
             };
         });
-
-
     }
 }
