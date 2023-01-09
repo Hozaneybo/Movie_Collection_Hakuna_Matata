@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Category;
 import be.Movie;
+import gui.model.CatMovieModel;
 import gui.model.CategoryModel;
 import gui.model.MovieModel;
 import javafx.event.ActionEvent;
@@ -25,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -42,14 +45,16 @@ public class AddMovieController extends ControllerManager implements Initializab
     private File file;
     private MovieModel movieModel;
     private CategoryModel categoryModel;
+    private CatMovieModel catMovieModel;
 
-    public String fileMusicPath = "movies";
-    private Path target = Paths.get(fileMusicPath);
+    public String targetString = "movies";
+    private Path target = Paths.get(targetString);
     MovieViewController movieViewController;
     public AddMovieController() {
         try {
             movieModel = new MovieModel();
             categoryModel = new CategoryModel();
+            catMovieModel = new CatMovieModel();
         }catch (Exception e){
 
             e.printStackTrace();
@@ -67,15 +72,19 @@ public class AddMovieController extends ControllerManager implements Initializab
 
         //Instantiate variables
         String name = txtName.getText();
-        String fileLink = txtFilelink.getText();
+        String fileLink = targetString + "/" + file.getName();
         double personalRating = Double.parseDouble(txtRating.getText());
         double IMDBRating = Double.parseDouble(txtRating.getText());
-        Date lastView = new Date(1234567890123L);
+        Date lastView = new Date(System.currentTimeMillis());
 
         try
         {
             Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
             movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
+            List<Integer> ids = new ArrayList<>();
+            ids.add(listOfCategory.getSelectionModel().getSelectedItem().getId());
+            catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
+
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -28,13 +28,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MovieViewController extends ControllerManager implements Initializable {
     // public TableColumn cIMDBRate;
     @FXML
-    private TableColumn cLastview;
+    private TableColumn <Movie, Date> cLastview;
 
     @FXML
     private TableColumn<Movie, Integer> cNr;
@@ -161,7 +162,9 @@ public class MovieViewController extends ControllerManager implements Initializa
         if(movieModel.getObservableAllMovies().size()!=0){
             tableview.setItems(movieModel.getObservableAllMovies());
             cTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
-            cIMDBRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("IMDBRating"));}
+            cIMDBRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("IMDBRating"));
+            cLastview.setCellValueFactory(new PropertyValueFactory<Movie, Date>("lastView"));
+        }
 
 
         cNr.setCellFactory(column -> {

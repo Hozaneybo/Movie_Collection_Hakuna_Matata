@@ -3,10 +3,12 @@ package gui.model;
 public class MCModel {
     private MovieModel movieModel;
     private CategoryModel categoryModel;
+    private CatMovieModel catMovieModel;
 
     public MCModel() throws Exception {
         movieModel = new MovieModel();
         categoryModel = new CategoryModel();
+        catMovieModel = new CatMovieModel();
     }
 
 
@@ -30,4 +32,11 @@ public class MCModel {
         this.categoryModel = categoryModel;
     }
 
+    public CatMovieModel getCatMovieModel() {
+        return catMovieModel;
+    }
+
+    public void setCatMovieModel(CatMovieModel catMovieModel) {
+        this.catMovieModel = catMovieModel;
+    }
 }
