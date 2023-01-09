@@ -66,7 +66,7 @@ public class MovieViewController extends ControllerManager implements Initializa
     private MediaPlayer mediaPlayer;
     private ArrayList<File> movies;
     private File directory;
-    private int songNumber;
+
 
     private Media media;
     public MovieViewController() {
@@ -202,8 +202,6 @@ public class MovieViewController extends ControllerManager implements Initializa
             throw new RuntimeException(e);
         }
         lbl1.setText(getModel().getCatMovieModel().getCategories(tableview.getSelectionModel().getSelectedItem().getId()).toString());
-
-
     }
 
     public void rate(ActionEvent actionEvent) {
@@ -212,7 +210,5 @@ public class MovieViewController extends ControllerManager implements Initializa
         } catch (Exception e) {
             //throw new RuntimeException(e);
         }
-
-
     }
 }
