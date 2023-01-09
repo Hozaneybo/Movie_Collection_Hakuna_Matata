@@ -122,6 +122,7 @@ public class MovieViewController extends ControllerManager implements Initializa
         if(action.get() == ButtonType.OK)
         {
             movieModel.deleteMovie(selectedMovie);
+            getModel().getCatMovieModel().deleteCatMovie(selectedMovie.getId());
             refreshMovieTable();
         }
     }

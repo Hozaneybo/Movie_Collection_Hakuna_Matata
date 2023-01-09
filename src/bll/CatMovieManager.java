@@ -31,6 +31,9 @@ public class CatMovieManager {
             catMovieDAO.addCatMovie(cm);
         }
     }
+    public void deleteCatMovie(int id) throws SQLException {
+        catMovieDAO.deleteCatMovie(id);
+    }
 
 
     public List<Integer> getCategories(int movieID) throws SQLException {
