@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" stylesheets="@../../CSS/scratch.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AddCategoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="400.0" stylesheets="@../../CSS/scratch.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AddCategoryController">
     <children>
-        <Label layoutX="14.0" layoutY="14.0" text="Category Name:" />
-        <TextField fx:id="nameField" layoutX="102.0" layoutY="10.0" prefHeight="25.0" prefWidth="200.0" />
-        <HBox alignment="CENTER" layoutX="14.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0">
-            <children>
-                <Button fx:id="addButton" mnemonicParsing="false" onAction="#saveCategory" prefHeight="25.0" prefWidth="100.0" text="Add" />
-                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelSaving" prefHeight="25.0" prefWidth="100.0" text="Cancel" />
-            </children>
-        </HBox>
+        <Label layoutX="29.0" layoutY="48.0" text="Category Name:">
+         <effect>
+            <Blend />
+         </effect></Label>
+        <TextField fx:id="nameField" layoutX="135.0" layoutY="41.0" prefHeight="33.0" prefWidth="241.0">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color green="0.2666666805744171" blue="1.0" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+          <Button fx:id="addButton" layoutX="275.0" layoutY="97.0" mnemonicParsing="false" onAction="#saveCategory" prefHeight="33.0" prefWidth="100.0" text="Add">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
+          <Button fx:id="cancelButton" layoutX="134.0" layoutY="96.0" mnemonicParsing="false" onAction="#cancelSaving" prefHeight="33.0" prefWidth="100.0" text="Cancel">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
     </children>
 </AnchorPane>

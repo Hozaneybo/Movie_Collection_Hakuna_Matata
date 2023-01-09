@@ -1,22 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 
 <AnchorPane prefHeight="306.0" prefWidth="628.0" stylesheets="@../../CSS/scratch.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AddMovieController">
     <children>
-        <TextField fx:id="txtName" layoutX="387.0" layoutY="31.0" />
-        <TextField fx:id="txtFilelink" layoutX="388.0" layoutY="85.0" />
-        <Button layoutX="557.0" layoutY="85.0" mnemonicParsing="false" onAction="#choose" text="Choose" />
-        <Button layoutX="379.0" layoutY="201.0" mnemonicParsing="false" onAction="#save" text="Save" />
-        <Button layoutX="486.0" layoutY="201.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-        <TextField fx:id="txtRating" layoutX="388.0" layoutY="132.0" />
-        <Label layoutX="317.0" layoutY="32.0" prefHeight="26.0" prefWidth="52.0" text="Title" />
-        <Label layoutX="316.0" layoutY="89.0" prefHeight="18.0" prefWidth="52.0" text="Filelink" />
-        <Label layoutX="302.0" layoutY="132.0" prefHeight="26.0" prefWidth="70.0" text="IMDBRating" />
-        <Label layoutX="98.0" layoutY="9.0" prefHeight="18.0" prefWidth="52.0" text="Category" />
-        <Button layoutX="34.0" layoutY="253.0" mnemonicParsing="false" onAction="#addCategory" text="Add Category" />
-        <Button layoutX="133.0" layoutY="253.0" mnemonicParsing="false" onAction="#removeCategory" prefHeight="26.0" prefWidth="109.0" text="Remove Category" />
+        <TextField fx:id="txtName" layoutX="387.0" layoutY="39.0" prefHeight="18.0" prefWidth="149.0">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color green="0.2666666805744171" blue="1.0" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+        <TextField fx:id="txtFilelink" layoutX="388.0" layoutY="85.0">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color green="0.2666666805744171" blue="1.0" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+        <Button layoutX="557.0" layoutY="85.0" mnemonicParsing="false" onAction="#choose" prefHeight="25.0" prefWidth="58.0" text="Choose">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
+        <Button layoutX="387.0" layoutY="182.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="58.0" text="Save">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
+        <Button layoutX="478.0" layoutY="182.0" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="58.0" text="Cancel">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
+        <TextField fx:id="txtRating" layoutX="388.0" layoutY="132.0">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color green="0.2666666805744171" blue="1.0" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+        <Label layoutX="317.0" layoutY="38.0" prefHeight="26.0" prefWidth="52.0" text="Title">
+         <effect>
+            <Blend />
+         </effect></Label>
+        <Label layoutX="316.0" layoutY="89.0" prefHeight="18.0" prefWidth="52.0" text="Filelink">
+         <effect>
+            <Blend />
+         </effect></Label>
+        <Label layoutX="302.0" layoutY="132.0" prefHeight="26.0" prefWidth="70.0" text="IMDBRating">
+         <effect>
+            <Blend />
+         </effect></Label>
+        <Label layoutX="98.0" layoutY="9.0" prefHeight="18.0" prefWidth="52.0" text="Category">
+         <effect>
+            <Blend />
+         </effect></Label>
+        <Button layoutX="34.0" layoutY="253.0" mnemonicParsing="false" onAction="#addCategory" text="Add Category">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
+        <Button layoutX="133.0" layoutY="253.0" mnemonicParsing="false" onAction="#removeCategory" prefHeight="26.0" prefWidth="109.0" text="Remove Category">
+         <effect>
+            <Lighting diffuseConstant="2.0" light="$null">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect></Button>
       <TableView fx:id="listOfCategory" layoutX="24.0" layoutY="32.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="cCategories" prefWidth="199.0" text="Categories" />

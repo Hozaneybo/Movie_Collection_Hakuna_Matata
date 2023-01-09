@@ -79,26 +79,27 @@ public class AddMovieController extends ControllerManager implements Initializab
         double IMDBRating = Double.parseDouble(txtRating.getText());
         Date lastView = new Date(System.currentTimeMillis());
 
-        try
-        {
-            Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
-            movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
-            ObservableList<Category> selectedItems = listOfCategory.getSelectionModel().getSelectedItems();
-            List<Integer> ids = new ArrayList<>();
-            for (Category c : selectedItems) {
-                ids.add(c.getId());
+            try {
+                Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
+                movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
+                ObservableList<Category> selectedItems = listOfCategory.getSelectionModel().getSelectedItems();
+                List<Integer> ids = new ArrayList<>();
+                for (Category c : selectedItems) {
+                    ids.add(c.getId());
+                }
+
+                catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                //throw new RuntimeException(e);
             }
-
-            catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            //throw new RuntimeException(e);
-        }
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
     }
+
+
 
 
     public void cancel(ActionEvent event) {
@@ -147,6 +148,9 @@ public class AddMovieController extends ControllerManager implements Initializab
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText("Are you sure you want to delete: " + selectedCategory.getName().concat( " ?"));
+        DialogPane dialogPane = alert.getDialogPane();
+        // Add the CSS file to the dialog pane
+        dialogPane.getStylesheets().add("CSS/scratch.css");
         Optional<ButtonType> action = alert.showAndWait();
         if(action.get() == ButtonType.OK)
         {
