@@ -1,7 +1,6 @@
 package gui.model;
 
 import bll.CatMovieManager;
-import dal.db.CatMovieDAO;
 
 import java.sql.SQLException;
 import java.util.List;

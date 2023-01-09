@@ -2,7 +2,6 @@ package gui.model;
 
 import be.Movie;
 import bll.MovieManager;
-import gui.controller.MovieViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

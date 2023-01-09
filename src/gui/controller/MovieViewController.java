@@ -9,35 +9,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import java.sql.Date;
-
-
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MovieViewController extends ControllerManager implements Initializable {
-    // public TableColumn cIMDBRate;
     @FXML
     private TableColumn <Movie, Date> cLastview;
 
@@ -63,12 +54,8 @@ public class MovieViewController extends ControllerManager implements Initializa
 
     private CategoryModel categoryModel;
 
-    private MediaPlayer mediaPlayer;
-    private ArrayList<File> movies;
-    private File directory;
 
 
-    private Media media;
     public MovieViewController() {
         try {
             movieModel = new MovieModel();
@@ -82,10 +69,6 @@ public class MovieViewController extends ControllerManager implements Initializa
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        movies = new ArrayList<>();
-        directory = new File("movies");
-
-
 
     }
 

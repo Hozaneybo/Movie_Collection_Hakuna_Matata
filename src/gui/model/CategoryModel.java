@@ -1,13 +1,10 @@
 package gui.model;
 
 import be.Category;
-import be.Movie;
 import bll.CategoryManager;
-import bll.MovieManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class CategoryModel {
