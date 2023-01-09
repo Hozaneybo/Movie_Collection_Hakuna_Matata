@@ -53,6 +53,9 @@ public class MovieModel {
         movieManager.deleteMovie(movie);
         moviesToBeViewed.remove(movie);
     }
+    public void updatePersonalRating(int movieId, double personalRating) throws Exception {
+        movieManager.updatePersonalRating(movieId, personalRating);
+    }
 
 
 
@@ -64,5 +67,9 @@ public class MovieModel {
         List<Movie> searchResults = movieManager.searchMovies(query);
         moviesToBeViewed.clear();
         moviesToBeViewed.addAll(searchResults);
+    }
+    public void updateDate(int movieId, Date currentDate) throws Exception
+    {
+        movieManager.updateDate(movieId, currentDate);
     }
 }

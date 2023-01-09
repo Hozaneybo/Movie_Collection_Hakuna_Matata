@@ -20,6 +20,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +29,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+
+import java.sql.Date;
+
+
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -50,7 +54,7 @@ public class MovieViewController extends ControllerManager implements Initializa
     private Label lbl1;
 
     @FXML
-    private TextField serch;
+    private TextField serch, txtRate;
 
     @FXML
     private TableView<Movie> tableview;
@@ -163,6 +167,8 @@ public class MovieViewController extends ControllerManager implements Initializa
             cTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
             cIMDBRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("IMDBRating"));
             cLastview.setCellValueFactory(new PropertyValueFactory<Movie, Date>("lastView"));
+            cRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("personalRating"));
+
         }
 
 
@@ -188,9 +194,25 @@ public class MovieViewController extends ControllerManager implements Initializa
         Desktop.getDesktop().browse(uri);
         /**
          * just saving this code here cause I am gonna use it to show the Movie's categories
-         *
+         **/
+        Date lastView = new Date(System.currentTimeMillis());
+        try {
+            movieModel.updateDate(tableview.getSelectionModel().getSelectedItem().getId(), lastView);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         lbl1.setText(getModel().getCatMovieModel().getCategories(tableview.getSelectionModel().getSelectedItem().getId()).toString());
 
-         */
+
+    }
+
+    public void rate(ActionEvent actionEvent) {
+        try {
+            movieModel.updatePersonalRating(tableview.getSelectionModel().getSelectedItem().getId(), Double.parseDouble(txtRate.getText()));
+        } catch (Exception e) {
+            //throw new RuntimeException(e);
+        }
+
+
     }
 }

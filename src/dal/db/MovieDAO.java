@@ -101,4 +101,39 @@ public class MovieDAO implements IMovieDataAccess {
             throw new Exception( ex);
         }
     }
+    public void updatePersonalRating(int movieId, double personalRating) throws Exception {
+        String sql = "UPDATE Movie SET PerRating = ? WHERE Id = ?;";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // Bind parameters
+            stmt.setDouble(1, personalRating);
+            stmt.setInt(2, movieId);
+
+            // Run the SQL statement
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not update personal rating for movie with ID " + movieId, ex);
+        }
+    }
+    public void updateDate(int movieId, Date currentDate) throws Exception {
+        String sql = "UPDATE Movie SET Lastview = ? WHERE Id = ?;";
+
+        try (Connection conn = dbConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            // Bind parameters
+            stmt.setDate(1, currentDate);
+            stmt.setInt(2, movieId);
+
+            // Run the SQL statement
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Could not update personal rating for movie with ID " + movieId, ex);
+        }
+    }
+
 }

@@ -12,6 +12,8 @@ public interface IMovieDataAccess {
     Movie createMovie(String name, String fileLink, double personalRating, double IMDBRating, Date lastView) throws Exception;
 
     public void deleteMovie(Movie movie) throws Exception;
+    public void updatePersonalRating(int movieId, double personalRating) throws Exception;
+    public void updateDate(int movieId, Date currentDate) throws Exception;
 
 }
 

@@ -14,9 +14,7 @@ public class MovieManager {
 
     IMovieDataAccess movieDAO_DB;
 
-    /**
-     * Creates AllPlaylistsDAO_DB to be able to use methods from AllPlaylistsDAO_DB class
-     */
+
     public MovieManager() {
         movieDAO_DB = new MovieDAO();
     }
@@ -28,11 +26,7 @@ public class MovieManager {
     public Movie createMovie(String name, String fileLink, double personalRating, double IMDBRating, Date lastView) throws Exception {
         return movieDAO_DB.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
     }
-    /**
-     *
-     * Returns the value of the deletedPlaylist method from the AllPlaylistsDAO_DB class
-     * @throws Exception
-     */
+
     public void deleteMovie (Movie movie) throws Exception {
         movieDAO_DB.deleteMovie(movie);
     }
@@ -40,5 +34,12 @@ public class MovieManager {
         List<Movie> allMovie = getAllMovie();
         List<Movie> searchResult = movieSercher.search(allMovie, query);
         return searchResult;
+    }
+    public void updatePersonalRating(int movieId, double personalRating) throws Exception {
+        movieDAO_DB.updatePersonalRating(movieId, personalRating);
+    }
+    public void updateDate(int movieId, Date currentDate) throws Exception
+    {
+        movieDAO_DB.updateDate(movieId, currentDate);
     }
 }
