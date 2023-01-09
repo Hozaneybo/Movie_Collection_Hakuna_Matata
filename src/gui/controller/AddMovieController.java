@@ -70,7 +70,7 @@ public class AddMovieController extends ControllerManager implements Initializab
 
     }
 
-    public void save(ActionEvent event) {
+    public void save(ActionEvent event) throws Exception {
 
         //Instantiate variables
         String name = txtName.getText();
@@ -79,22 +79,28 @@ public class AddMovieController extends ControllerManager implements Initializab
         double IMDBRating = Double.parseDouble(txtRating.getText());
         Date lastView = new Date(System.currentTimeMillis());
 
-            try {
-                Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
-                movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
-                ObservableList<Category> selectedItems = listOfCategory.getSelectionModel().getSelectedItems();
-                List<Integer> ids = new ArrayList<>();
-                for (Category c : selectedItems) {
-                    ids.add(c.getId());
-                }
 
-                catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                //throw new RuntimeException(e);
+        String fileName = file.getName();
+        if (fileName.endsWith(".mp4") || fileName.endsWith(".mpeg4")) {
+            Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
+            movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
+            ObservableList<Category> selectedItems = listOfCategory.getSelectionModel().getSelectedItems();
+            List<Integer> ids = new ArrayList<>();
+            for (Category c : selectedItems) {
+                ids.add(c.getId());
             }
+
+            catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Only files ending with .mp4 or mpeg4 can be added.");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
+        }
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
     }
