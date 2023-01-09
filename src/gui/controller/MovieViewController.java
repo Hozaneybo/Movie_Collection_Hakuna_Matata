@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -175,9 +176,12 @@ public class MovieViewController extends ControllerManager implements Initializa
     }
 
     public void playVideo(ActionEvent actionEvent) throws URISyntaxException, IOException, SQLException {
-        String defaultUserHome = System.getProperty("user.home").replaceAll("\\\\", "/");
-        URI uri = new URI(defaultUserHome.concat("/IdeaProjects/Movie_Collection_Hakuna_Matata/").concat(tableview.getSelectionModel().getSelectedItem().getFileLink()));
-        Desktop.getDesktop().browse(uri);
+
+        File file = new File(tableview.getSelectionModel().getSelectedItem().getFileLink());
+        String absolutePath = file.getAbsolutePath().replaceAll("\\\\", "/");
+
+        System.out.println(absolutePath);
+        Desktop.getDesktop().browse(URI.create(absolutePath));
         /**
          * just saving this code here cause I am gonna use it to show the Movie's categories
          **/
@@ -191,10 +195,17 @@ public class MovieViewController extends ControllerManager implements Initializa
     }
 
     public void rate(ActionEvent actionEvent) {
+        String rate = txtRate.getText();
+        if (!rate.matches("[1-9]|10")) {
+            // show an error message or alert to the user
+            return;
+        }
         try {
-            movieModel.updatePersonalRating(tableview.getSelectionModel().getSelectedItem().getId(), Double.parseDouble(txtRate.getText()));
+            movieModel.updatePersonalRating(tableview.getSelectionModel().getSelectedItem().getId(), Double.parseDouble(rate));
+            txtRate.clear();
         } catch (Exception e) {
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
+
 }

@@ -72,7 +72,7 @@ public class AddMovieController extends ControllerManager implements Initializab
         //Instantiate variables
         String name = txtName.getText();
         String fileLink = targetString + "/" + file.getName();
-        double personalRating = Double.parseDouble(txtRating.getText());
+        double personalRating = 0;
         double IMDBRating = Double.parseDouble(txtRating.getText());
         Date lastView = new Date(System.currentTimeMillis());
 
