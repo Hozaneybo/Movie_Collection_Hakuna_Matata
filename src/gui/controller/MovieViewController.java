@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -17,9 +19,14 @@ import javafx.stage.Modality;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -40,7 +47,7 @@ public class MovieViewController extends ControllerManager implements Initializa
     private TableColumn<Movie, String> cTitle;
 
     @FXML
-    private Label category;
+    private Label lbl1;
 
     @FXML
     private TextField serch;
@@ -173,5 +180,17 @@ public class MovieViewController extends ControllerManager implements Initializa
                 }
             };
         });
+    }
+
+    public void playVideo(ActionEvent actionEvent) throws URISyntaxException, IOException, SQLException {
+        String defaultUserHome = System.getProperty("user.home").replaceAll("\\\\", "/");
+        URI uri = new URI(defaultUserHome.concat("/IdeaProjects/Movie_Collection_Hakuna_Matata/").concat(tableview.getSelectionModel().getSelectedItem().getFileLink()));
+        Desktop.getDesktop().browse(uri);
+        /**
+         * just saving this code here cause I am gonna use it to show the Movie's categories
+         *
+        lbl1.setText(getModel().getCatMovieModel().getCategories(tableview.getSelectionModel().getSelectedItem().getId()).toString());
+
+         */
     }
 }

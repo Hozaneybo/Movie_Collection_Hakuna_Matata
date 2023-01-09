@@ -1,10 +1,12 @@
 package gui.controller;
 
+import be.CatMovie;
 import be.Category;
 import be.Movie;
 import gui.model.CatMovieModel;
 import gui.model.CategoryModel;
 import gui.model.MovieModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,8 +83,12 @@ public class AddMovieController extends ControllerManager implements Initializab
         {
             Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
             movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
+            ObservableList<Category> selectedItems = listOfCategory.getSelectionModel().getSelectedItems();
             List<Integer> ids = new ArrayList<>();
-            ids.add(listOfCategory.getSelectionModel().getSelectedItem().getId());
+            for (Category c : selectedItems) {
+                ids.add(c.getId());
+            }
+
             catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
 
 
