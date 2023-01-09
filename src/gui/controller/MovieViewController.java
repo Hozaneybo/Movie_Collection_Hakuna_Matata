@@ -125,11 +125,14 @@ public class MovieViewController extends ControllerManager implements Initializa
     public void removeMovie(ActionEvent event) throws Exception {
 
         Movie selectedMovie = tableview.getSelectionModel().getSelectedItem();
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText("Are you sure you want to delete: " + selectedMovie.getName().concat( " ?"));
+        DialogPane dialogPane = alert.getDialogPane();
+        // Add the CSS file to the dialog pane
+        dialogPane.getStylesheets().add("CSS/scratch.css");
         Optional<ButtonType> action = alert.showAndWait();
+
         if(action.get() == ButtonType.OK)
         {
             movieModel.deleteMovie(selectedMovie);
