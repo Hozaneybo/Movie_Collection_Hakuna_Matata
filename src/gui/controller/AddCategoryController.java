@@ -4,6 +4,8 @@ import gui.model.CategoryModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -32,13 +34,22 @@ public class AddCategoryController extends ControllerManager {
         //Instantiate variables
         String name = nameField.getText();
 
-        try {
+        if (!nameField.getText().isEmpty()) {
+            try {
             //Calls a method from the SongModel
             categoryModel.createCategory(name);
 
         } catch (Exception e) {
             e.printStackTrace();
             //throw new RuntimeException(e);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please add a category ");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
         }
         //Closes the window
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

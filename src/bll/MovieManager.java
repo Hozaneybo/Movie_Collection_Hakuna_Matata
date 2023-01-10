@@ -4,7 +4,6 @@ import be.Movie;
 import dal.Idal.IMovieDataAccess;
 import dal.db.MovieDAO;
 import dal.util.MovieSearcher;
-
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;

@@ -1,9 +1,7 @@
 package dal.db;
 
 import be.Category;
-import be.Movie;
 import dal.Idal.ICategoryDataAccess;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

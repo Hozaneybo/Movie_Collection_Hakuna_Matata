@@ -68,14 +68,13 @@ public class AddMovieController extends ControllerManager implements Initializab
     }
 
     public void save(ActionEvent event) throws Exception {
-
+        if ((!txtName.getText().isEmpty()) || (!txtFilelink.getText().isEmpty()) || (!txtRating.getText().isEmpty())) {
         //Instantiate variables
         String name = txtName.getText();
         String fileLink = targetString + "/" + file.getName();
         double personalRating = 0;
         double IMDBRating = Double.parseDouble(txtRating.getText());
         Date lastView = new Date(System.currentTimeMillis());
-
 
         String fileName = file.getName();
         if (fileName.endsWith(".mp4") || fileName.endsWith(".mpeg4")) {
@@ -86,11 +85,21 @@ public class AddMovieController extends ControllerManager implements Initializab
             for (Category c : selectedItems) {
                 ids.add(c.getId());
             }
-            catMovieModel.setCategories(movieModel.getMovieIdByName(name), ids);
-        }
+
+                catMovieModel.setCategories(movieModel.getMovieIdByName(name), ids);
+            }
+
         else
-        {
+            {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Only files ending with .mp4 or mpeg4 can be added.");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
+            }
+    }else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all information");
             // Get the dialog pane of the alert
             DialogPane dialogPane = alert.getDialogPane();
             // Add the CSS file to the dialog pane
@@ -145,8 +154,8 @@ public class AddMovieController extends ControllerManager implements Initializab
 
     public void removeCategory(ActionEvent event) throws Exception {
 
+        if(listOfCategory.getSelectionModel().getSelectedItem() != null){
         Category selectedCategory = listOfCategory.getSelectionModel().getSelectedItem();
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning");
         alert.setHeaderText("Are you sure you want to delete: " + selectedCategory.getName().concat( " ?"));
@@ -157,6 +166,14 @@ public class AddMovieController extends ControllerManager implements Initializab
         if(action.get() == ButtonType.OK)
         {
             categoryModel.deleteCategory(selectedCategory);
+        }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a category to remove it ");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
         }
     }
 

@@ -110,20 +110,28 @@ public class MovieViewController extends ControllerManager implements Initializa
 
     public void removeMovie(ActionEvent event) throws Exception {
 
-        Movie selectedMovie = tableview.getSelectionModel().getSelectedItem();
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Warning");
-        alert.setHeaderText("Are you sure you want to delete: " + selectedMovie.getName().concat( " ?"));
-        DialogPane dialogPane = alert.getDialogPane();
-        // Add the CSS file to the dialog pane
-        dialogPane.getStylesheets().add("CSS/scratch.css");
-        Optional<ButtonType> action = alert.showAndWait();
+        if(tableview.getSelectionModel().getSelectedItem() != null) {
+            Movie selectedMovie = tableview.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Are you sure you want to delete: " + selectedMovie.getName().concat(" ?"));
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            Optional<ButtonType> action = alert.showAndWait();
 
-        if(action.get() == ButtonType.OK)
-        {
-            movieModel.deleteMovie(selectedMovie);
-            getModel().getCatMovieModel().deleteCatMovie(selectedMovie.getId());
-            refreshMovieTable();
+            if (action.get() == ButtonType.OK) {
+                movieModel.deleteMovie(selectedMovie);
+                getModel().getCatMovieModel().deleteCatMovie(selectedMovie.getId());
+                refreshMovieTable();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a movie to remove it ");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
         }
     }
     public void refreshMovieTable()
@@ -188,16 +196,26 @@ public class MovieViewController extends ControllerManager implements Initializa
 
     public void playVideo(ActionEvent actionEvent) throws URISyntaxException, IOException, SQLException {
 
-        File file = new File(tableview.getSelectionModel().getSelectedItem().getFileLink());
-        String absolutePath = file.getAbsolutePath().replaceAll("\\\\", "/");
-        Desktop.getDesktop().browse(URI.create(absolutePath));
-        Date lastView = new Date(System.currentTimeMillis());
-        try {
-            movieModel.updateDate(tableview.getSelectionModel().getSelectedItem().getId(), lastView);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (tableview.getSelectionModel().getSelectedItem() != null) {
+            File file = new File(tableview.getSelectionModel().getSelectedItem().getFileLink());
+            String absolutePath = file.getAbsolutePath().replaceAll("\\\\", "/");
+            Desktop.getDesktop().browse(URI.create(absolutePath));
+            Date lastView = new Date(System.currentTimeMillis());
+            try {
+                movieModel.updateDate(tableview.getSelectionModel().getSelectedItem().getId(), lastView);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a movie to be played");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
         }
     }
+
     public void showCategories() throws SQLException {
 
         try {

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="551.0" prefWidth="554.0" style="-fx-border-color: #08298A;" stylesheets="@../../CSS/scratch.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MovieViewController">
+<AnchorPane prefHeight="551.0" prefWidth="554.0" style="-fx-border-color: #08298A;" stylesheets="@../../CSS/scratch.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MovieViewController">
     <children>
         <TableView fx:id="tableview" layoutX="6.0" layoutY="57.0" onMouseClicked="#tblMoviesClicked" prefHeight="400.0" prefWidth="500.0" style="-fx-border-color: gold;" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
             <columns>
@@ -23,7 +24,7 @@
                 <TableColumn fx:id="cLastview" prefWidth="138.39996337890625" text="Last View" />
             </columns>
         </TableView>
-        <TextField fx:id="serch" layoutX="21.0" layoutY="16.0" prefHeight="32.0" prefWidth="204.0">
+        <TextField fx:id="serch" layoutX="21.0" layoutY="16.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
          <effect>
             <InnerShadow>
                <color>
@@ -64,7 +65,13 @@
                     </bumpInput>
                 </Lighting>
             </effect></Button>
-        <Label fx:id="lbl1" layoutX="21.0" layoutY="468.0" prefHeight="26.0" prefWidth="353.0" text="Label" />
+        <Label fx:id="lbl1" layoutX="21.0" layoutY="468.0" prefHeight="26.0" prefWidth="353.0" text="Category">
+         <font>
+            <Font name="Times New Roman Italic" size="18.0" />
+         </font>
+         <effect>
+            <Glow />
+         </effect></Label>
       <TextField fx:id="txtRate" layoutX="388.0" layoutY="17.0" prefHeight="32.0" prefWidth="73.0" promptText="Rate(1-10)">
          <effect>
             <InnerShadow>
