@@ -28,13 +28,5 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setResizable(false);
 
-        // Create an alert with the warning message
-        Alert alert = new Alert(Alert.AlertType.WARNING, "Remember to delete movies that have a personal rating under 6 and have not been opened from the application in more than 2 years.");
-        // Get the dialog pane of the alert
-        DialogPane dialogPane = alert.getDialogPane();
-        // Add the CSS file to the dialog pane
-        dialogPane.getStylesheets().add("CSS/scratch.css");
-        alert.showAndWait();
-
     }
 }

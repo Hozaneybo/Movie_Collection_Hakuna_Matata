@@ -146,6 +146,14 @@ public class MovieViewController extends ControllerManager implements Initializa
             }
         });
 
+        if(movieModel.getObservableAllMovies()!= null){
+        // Create an alert with the warning message
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Remember to delete movies that have a personal rating under 6 and have not been opened from the application in more than 2 years.");
+        // Get the dialog pane of the alert
+        DialogPane dialogPane = alert.getDialogPane();
+        // Add the CSS file to the dialog pane
+        dialogPane.getStylesheets().add("CSS/scratch.css");
+        alert.showAndWait();}
     }
 
     public void showAllMoviesInTable()
@@ -182,20 +190,13 @@ public class MovieViewController extends ControllerManager implements Initializa
 
         File file = new File(tableview.getSelectionModel().getSelectedItem().getFileLink());
         String absolutePath = file.getAbsolutePath().replaceAll("\\\\", "/");
-
-        System.out.println(absolutePath);
         Desktop.getDesktop().browse(URI.create(absolutePath));
-        /**
-         * just saving this code here cause I am gonna use it to show the Movie's categories
-         **/
         Date lastView = new Date(System.currentTimeMillis());
         try {
             movieModel.updateDate(tableview.getSelectionModel().getSelectedItem().getId(), lastView);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        //lbl1.setText(getModel().getCatMovieModel().getCategories(tableview.getSelectionModel().getSelectedItem().getId()).toString());
-        //showCategories();
     }
     public void showCategories() throws SQLException {
 
@@ -205,8 +206,6 @@ public class MovieViewController extends ControllerManager implements Initializa
                 java.util.List<Integer> categoryIds = getModel().getCatMovieModel().getCategories(movieId);
                 List<String> categoryNames = new ArrayList<>();
                 for (int id : categoryIds) {
-                    //int categoryId = Integer.parseInt(id);
-                    //Category category = getModel().getCategoryModel().getObservableAllCategories().get();
                     categoryNames.add(getModel().getCategoryModel().getObservableAllCategories().get(id-1).getName());
                 }
                 lbl1.setText(categoryNames.toString());
