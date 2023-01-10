@@ -68,7 +68,7 @@ public class AddMovieController extends ControllerManager implements Initializab
     }
 
     public void save(ActionEvent event) throws Exception {
-        if ((!txtName.getText().isEmpty()) || (!txtFilelink.getText().isEmpty()) || (!txtRating.getText().isEmpty())) {
+        if ((!txtName.getText().isEmpty()) && (!txtFilelink.getText().isEmpty()) && (!txtRating.getText().isEmpty())) {
         //Instantiate variables
         String name = txtName.getText();
         String fileLink = targetString + "/" + file.getName();
@@ -85,20 +85,20 @@ public class AddMovieController extends ControllerManager implements Initializab
             for (Category c : selectedItems) {
                 ids.add(c.getId());
             }
-
-                catMovieModel.setCategories(movieModel.getMovieIdByName(name), ids);
-            }
-
-        else
-            {
+            catMovieModel.setCategories(movieModel.getMovieIdByName(name), ids);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        }
+        else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Only files ending with .mp4 or mpeg4 can be added.");
             // Get the dialog pane of the alert
             DialogPane dialogPane = alert.getDialogPane();
             // Add the CSS file to the dialog pane
             dialogPane.getStylesheets().add("CSS/scratch.css");
             alert.showAndWait();
-            }
-    }else {
+        }
+
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all information");
             // Get the dialog pane of the alert
             DialogPane dialogPane = alert.getDialogPane();
@@ -106,8 +106,7 @@ public class AddMovieController extends ControllerManager implements Initializab
             dialogPane.getStylesheets().add("CSS/scratch.css");
             alert.showAndWait();
         }
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
+
     }
 
 
@@ -138,12 +137,12 @@ public class AddMovieController extends ControllerManager implements Initializab
 
         AddCategoryController addCategoryController = loader.getController();
         addCategoryController.setModel(super.getModel());
-        showAllMoviesInTable();
+        //showAllMoviesInTable();
         addCategoryController.setup();
 
 
         Stage dialogWindow = new Stage();
-        dialogWindow.setTitle("Add Song");
+        dialogWindow.setTitle("Add Category");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
         dialogWindow.initOwner(((Node)event.getSource()).getScene().getWindow());
         Scene scene = new Scene(pane);

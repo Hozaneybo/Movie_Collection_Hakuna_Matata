@@ -154,7 +154,8 @@ public class MovieViewController extends ControllerManager implements Initializa
             }
         });
 
-        if(movieModel.getObservableAllMovies()!= null){
+
+        if(movieModel.getObservableAllMovies().size()!= 0){
         // Create an alert with the warning message
         Alert alert = new Alert(Alert.AlertType.WARNING, "Remember to delete movies that have a personal rating under 6 and have not been opened from the application in more than 2 years.");
         // Get the dialog pane of the alert
@@ -216,7 +217,7 @@ public class MovieViewController extends ControllerManager implements Initializa
         }
     }
 
-    public void showCategories() throws SQLException {
+    public void showCategories() {
 
         try {
             if (tableview.getSelectionModel().getSelectedItem() != null) {
@@ -236,6 +237,12 @@ public class MovieViewController extends ControllerManager implements Initializa
         String rate = txtRate.getText();
         if (!rate.matches("[1-9]|10")) {
             // show an error message or alert to the user
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a number between [1 - 10]");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();
             return;
         }
         try {

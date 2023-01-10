@@ -3,6 +3,7 @@ package gui.controller;
 import gui.model.CategoryModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
@@ -38,7 +39,12 @@ public class AddCategoryController extends ControllerManager {
             try {
             //Calls a method from the SongModel
             categoryModel.createCategory(name);
+                setup();
 
+
+            //Closes the window
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.close();
         } catch (Exception e) {
             e.printStackTrace();
             //throw new RuntimeException(e);
@@ -51,9 +57,8 @@ public class AddCategoryController extends ControllerManager {
             dialogPane.getStylesheets().add("CSS/scratch.css");
             alert.showAndWait();
         }
-        //Closes the window
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.close();
+
+
 
     }
 
