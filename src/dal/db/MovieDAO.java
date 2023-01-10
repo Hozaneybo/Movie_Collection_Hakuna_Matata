@@ -135,5 +135,22 @@ public class MovieDAO implements IMovieDataAccess {
             throw new Exception("Could not update personal rating for movie with ID " + movieId, ex);
         }
     }
+    public int getMovieIdByName(String name) throws SQLException {
+        int id = -1;
+        //Connection connection = null;
+         //statement = null;
+         //resultSet = null;
+        try  (Connection conn = dbConnector.getConnection()) {
+            //connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+            PreparedStatement statement = conn.prepareStatement("SELECT Id FROM Movie WHERE Name = ?");
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("Id");
+            }
+        }
+        return id;
+    }
+
 
 }

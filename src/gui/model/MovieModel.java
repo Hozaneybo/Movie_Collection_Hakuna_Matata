@@ -55,6 +55,10 @@ public class MovieModel {
     public void updatePersonalRating(int movieId, double personalRating) throws Exception {
         movieManager.updatePersonalRating(movieId, personalRating);
     }
+    public int getMovieIdByName(String name) throws SQLException
+    {
+        return movieManager.getMovieIdByName(name);
+    }
 
 
 

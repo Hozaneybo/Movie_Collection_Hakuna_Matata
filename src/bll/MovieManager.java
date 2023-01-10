@@ -42,4 +42,8 @@ public class MovieManager {
     {
         movieDAO_DB.updateDate(movieId, currentDate);
     }
+    public int getMovieIdByName(String name) throws SQLException
+    {
+        return movieDAO_DB.getMovieIdByName(name);
+    }
 }

@@ -86,7 +86,7 @@ public class AddMovieController extends ControllerManager implements Initializab
             for (Category c : selectedItems) {
                 ids.add(c.getId());
             }
-            catMovieModel.setCategories(movieModel.getObservableAllMovies().size(), ids);
+            catMovieModel.setCategories(movieModel.getMovieIdByName(name), ids);
         }
         else
         {

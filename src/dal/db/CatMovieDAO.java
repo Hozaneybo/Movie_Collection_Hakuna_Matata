@@ -25,7 +25,7 @@ public class CatMovieDAO {
 
     public void deleteCatMovie(int id) throws SQLException {
         try (Connection connection = dbConnector.getConnection()) {
-            String sql = "DELETE FROM cat_movie WHERE id = ?";
+            String sql = "DELETE FROM cat_movie WHERE movie_id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             statement.executeUpdate();
