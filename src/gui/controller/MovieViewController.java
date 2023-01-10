@@ -1,5 +1,7 @@
 package gui.controller;
 
+import be.CatMovie;
+import be.Category;
 import be.Movie;
 import gui.model.CategoryModel;
 import gui.model.MovieModel;
@@ -26,6 +28,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -73,11 +77,9 @@ public class MovieViewController extends ControllerManager implements Initializa
 
     }
 
-    public void tblMoviesClicked(javafx.scene.input.MouseEvent mouseEvent) {
+    public void tblMoviesClicked(javafx.scene.input.MouseEvent mouseEvent) throws SQLException {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-            if (mouseEvent.getClickCount() == 2) {
-
-            }
+            showCategories();
         }
     }
 
@@ -156,6 +158,7 @@ public class MovieViewController extends ControllerManager implements Initializa
             cLastview.setCellValueFactory(new PropertyValueFactory<Movie, Date>("lastView"));
             cRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("personalRating"));
 
+
         }
 
 
@@ -191,9 +194,27 @@ public class MovieViewController extends ControllerManager implements Initializa
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        lbl1.setText(getModel().getCatMovieModel().getCategories(tableview.getSelectionModel().getSelectedItem().getId()).toString());
+        //lbl1.setText(getModel().getCatMovieModel().getCategories(tableview.getSelectionModel().getSelectedItem().getId()).toString());
+        //showCategories();
     }
+    public void showCategories() throws SQLException {
 
+        try {
+            if (tableview.getSelectionModel().getSelectedItem() != null) {
+                int movieId = tableview.getSelectionModel().getSelectedItem().getId();
+                java.util.List<Integer> categoryIds = getModel().getCatMovieModel().getCategories(movieId);
+                List<String> categoryNames = new ArrayList<>();
+                for (int id : categoryIds) {
+                    //int categoryId = Integer.parseInt(id);
+                    //Category category = getModel().getCategoryModel().getObservableAllCategories().get();
+                    categoryNames.add(getModel().getCategoryModel().getObservableAllCategories().get(id-1).getName());
+                }
+                lbl1.setText(categoryNames.toString());
+            }
+        } catch (Exception e) {
+            // handle the exception
+        }
+    }
     public void rate(ActionEvent actionEvent) {
         String rate = txtRate.getText();
         if (!rate.matches("[1-9]|10")) {
