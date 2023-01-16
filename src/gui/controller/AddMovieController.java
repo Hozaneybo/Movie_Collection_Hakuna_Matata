@@ -4,6 +4,7 @@ import be.Category;
 import gui.model.CatMovieModel;
 import gui.model.CategoryModel;
 import gui.model.MovieModel;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,22 +34,19 @@ import java.util.ResourceBundle;
 public class AddMovieController extends ControllerManager implements Initializable {
     @FXML
     private TableView<Category> listOfCategory;
-
     @FXML
     private TableColumn<Category, String> cCategories;
-
-
     @FXML
     private TextField txtName, txtFilelink, txtRating;
 
-    private File file;
     private MovieModel movieModel;
     private CategoryModel categoryModel;
     private CatMovieModel catMovieModel;
 
     public String targetString = "movies";
     private Path target = Paths.get(targetString);
-    MovieViewController movieViewController;
+    private File file;
+
     public AddMovieController() {
         try {
             movieModel = new MovieModel();
@@ -63,22 +61,24 @@ public class AddMovieController extends ControllerManager implements Initializab
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-
     }
 
+    // A method to save the movie after filling the information in textFields
     public void save(ActionEvent event) throws Exception {
         if ((!txtName.getText().isEmpty()) && (!txtFilelink.getText().isEmpty()) && (!txtRating.getText().isEmpty())) {
         //Instantiate variables
         String name = txtName.getText();
-        String fileLink = targetString + "/" + file.getName();
-        double personalRating = 0;
+            String fileLink = targetString + "/" + file.getName().replaceAll(" ", "_");
+            double personalRating = 0;
         double IMDBRating = Double.parseDouble(txtRating.getText());
         Date lastView = new Date(System.currentTimeMillis());
 
-        String fileName = file.getName();
-        if (fileName.endsWith(".mp4") || fileName.endsWith(".mpeg4")) {
-            Files.copy(file.toPath(), target.resolve(file.toPath().getFileName()));
+            String fileName = file.getName().replaceAll(" ", "_");
+
+
+            if (fileName.endsWith(".mp4") || fileName.endsWith(".mpeg4")) {
+                Files.copy(file.toPath(), target.resolve(fileName));
+                fileLink = targetString + "/" + fileName;
             movieModel.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
             ObservableList<Category> selectedItems = listOfCategory.getSelectionModel().getSelectedItems();
             List<Integer> ids = new ArrayList<>();
@@ -86,11 +86,10 @@ public class AddMovieController extends ControllerManager implements Initializab
                 ids.add(c.getId());
             }
             catMovieModel.setCategories(movieModel.getMovieIdByName(name), ids);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
+            cancel(event);
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Only files ending with .mp4 or mpeg4 can be added.");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Only files ending with .mp4 or .mpeg4 can be added.");
             // Get the dialog pane of the alert
             DialogPane dialogPane = alert.getDialogPane();
             // Add the CSS file to the dialog pane
@@ -106,18 +105,11 @@ public class AddMovieController extends ControllerManager implements Initializab
             dialogPane.getStylesheets().add("CSS/scratch.css");
             alert.showAndWait();
         }
-
     }
-
-
-
-
     public void cancel(ActionEvent event) {
-
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
-
     public void choose(ActionEvent event) {
         //Instantiate variables
         Stage stage = new Stage();
@@ -129,7 +121,6 @@ public class AddMovieController extends ControllerManager implements Initializab
             txtFilelink.setText(file.toURI().toString());
         }
     }
-
     public void addCategory(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/gui/view/AddCategory.fxml"));
@@ -139,7 +130,6 @@ public class AddMovieController extends ControllerManager implements Initializab
         addCategoryController.setModel(super.getModel());
         //showAllMoviesInTable();
         addCategoryController.setup();
-
 
         Stage dialogWindow = new Stage();
         dialogWindow.setTitle("Add Category");
@@ -180,15 +170,13 @@ public class AddMovieController extends ControllerManager implements Initializab
     public void setup() {
         movieModel = getModel().getMovieModel();
         categoryModel = getModel().getCategoryModel();
-        showAllMoviesInTable();
+        showAllCategoriesInTable();
 
     }
-    public void showAllMoviesInTable()
+    public void showAllCategoriesInTable()
     {
-
         listOfCategory.setItems(categoryModel.getObservableAllCategories());
         cCategories.setCellValueFactory(new PropertyValueFactory<Category, String>("name"));
         listOfCategory.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
     }
 }

@@ -58,7 +58,7 @@ import java.sql.SQLException;
                 AddMovieController addMovieController = loader.getController();
 
                 addMovieController.setModel(super.getModel());
-                addMovieController.showAllMoviesInTable();
+                addMovieController.showAllCategoriesInTable();
                 addMovieController.setup();
                 setup();
                 //Closes the window

@@ -22,44 +22,32 @@ public class MCModel {
         catMovieModel = new CatMovieModel();
     }
 
-    /**
-     * Getter method for the movieModel field
-     */
+    // Getter method for the movieModel field
     public MovieModel getMovieModel() {
         return movieModel;
     }
 
-    /**
-     * Setter method for the movieModel field
-     */
+    // Setter method for the movieModel field
     public void setMovieModel(MovieModel movieModel) {
         this.movieModel = movieModel;
     }
 
-    /**
-     * Getter method for the categoryModel field
-     */
+    // Getter method for the categoryModel field
     public CategoryModel getCategoryModel() {
         return categoryModel;
     }
 
-    /**
-     * Setter method for the categoryModel field
-     */
+    // Setter method for the categoryModel field
     public void setCategoryModel(CategoryModel categoryModel) {
         this.categoryModel = categoryModel;
     }
 
-    /**
-     * Getter method for the catMovieModel field
-     */
+    // Getter method for the catMovieModel field
     public CatMovieModel getCatMovieModel() {
         return catMovieModel;
     }
 
-    /**
-     * Setter method for the catMovieModel field
-     */
+    // Setter method for the catMovieModel field
     public void setCatMovieModel(CatMovieModel catMovieModel) {
         this.catMovieModel = catMovieModel;
     }

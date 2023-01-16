@@ -57,8 +57,6 @@ public class MovieViewController extends ControllerManager implements Initializa
 
     private CategoryModel categoryModel;
 
-
-
     public MovieViewController() {
         try {
             movieModel = new MovieModel();
@@ -69,20 +67,15 @@ public class MovieViewController extends ControllerManager implements Initializa
         }
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
     public void tblMoviesClicked(javafx.scene.input.MouseEvent mouseEvent) throws SQLException {
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             showCategories();
         }
     }
-
-
-
     public void addMovie(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader();
@@ -96,7 +89,7 @@ public class MovieViewController extends ControllerManager implements Initializa
 
 
         Stage dialogWindow = new Stage();
-        dialogWindow.setTitle("Add Movie");
+        dialogWindow.setTitle("Add Movie/Category");
         dialogWindow.initModality(Modality.WINDOW_MODAL);
         dialogWindow.initOwner(((Node)event.getSource()).getScene().getWindow());
         Scene scene = new Scene(pane);
@@ -104,8 +97,6 @@ public class MovieViewController extends ControllerManager implements Initializa
 
         dialogWindow.showAndWait();
     }
-
-
     public void removeMovie(ActionEvent event) throws Exception {
 
         if(tableview.getSelectionModel().getSelectedItem() != null) {
@@ -151,7 +142,6 @@ public class MovieViewController extends ControllerManager implements Initializa
             }
         });
 
-
         if(movieModel.getObservableAllMovies().size()!= 0){
             // Create an alert with the warning message
             Alert alert = new Alert(Alert.AlertType.WARNING, "Remember to delete movies that have a personal rating under 6 and have not been opened from the application in more than 2 years.");
@@ -161,21 +151,15 @@ public class MovieViewController extends ControllerManager implements Initializa
             dialogPane.getStylesheets().add("CSS/scratch.css");
             alert.showAndWait();}
     }
-
     public void showAllMoviesInTable()
     {
-
         if(movieModel.getObservableAllMovies().size()!=0){
             tableview.setItems(movieModel.getObservableAllMovies());
             cTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
             cIMDBRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("IMDBRating"));
             cLastview.setCellValueFactory(new PropertyValueFactory<Movie, Date>("lastView"));
             cRate.setCellValueFactory(new PropertyValueFactory<Movie, Double>("personalRating"));
-
-
         }
-
-
         cNr.setCellFactory(column -> {
             return new TableCell<Movie, Integer>() {
                 @Override
@@ -191,7 +175,7 @@ public class MovieViewController extends ControllerManager implements Initializa
             };
         });
     }
-
+    // Play the selected movie in the system's media player by clicking on play button
     public void playVideo(ActionEvent actionEvent) throws URISyntaxException, IOException, SQLException {
 
         if (tableview.getSelectionModel().getSelectedItem() != null) {
@@ -214,7 +198,6 @@ public class MovieViewController extends ControllerManager implements Initializa
             alert.showAndWait();
         }
     }
-
     public void showCategories() {
 
         try {
@@ -231,6 +214,7 @@ public class MovieViewController extends ControllerManager implements Initializa
             // handle the exception
         }
     }
+    // Add a personal rating in the textField and submit by clicking on submit button
     public void rate(ActionEvent actionEvent) {
         String rate = txtRate.getText();
         if (!rate.matches("[1-9]|10")) {

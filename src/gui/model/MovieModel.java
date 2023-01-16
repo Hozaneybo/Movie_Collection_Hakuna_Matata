@@ -24,16 +24,12 @@ public class MovieModel {
     // Field to hold the currently selected movie
     private Movie selectedMovie;
 
-    /**
-     * Getter method for the selectedMovie field
-     */
+    // Getter method for the selectedMovie field
     public Movie getSelectedMovie() {
         return selectedMovie;
     }
 
-    /**
-     * Setter method for the selectedMovie field
-     */
+    // Setter method for the selectedMovie field
     public void setSelectedMovie(Movie selectedMovie) {
         this.selectedMovie = selectedMovie;
     }
@@ -59,9 +55,7 @@ public class MovieModel {
         Collections.sort(moviesToBeViewed, movieComparator);
     }
 
-    /**
-     * Getter method for the moviesToBeViewed observable list
-     */
+    // Getter method for the moviesToBeViewed observable list
     public ObservableList<Movie> getObservableAllMovies() {
         moviesToBeViewed.clear();
         try {
@@ -82,16 +76,12 @@ public class MovieModel {
         moviesToBeViewed.remove(movie);
     }
 
-    /**
-     * Method that uses the MovieManager to update the personal rating of a movie.
-     */
+    // Method that uses the MovieManager to update the personal rating of a movie.
     public void updatePersonalRating(int movieId, double personalRating) throws Exception {
         movieManager.updatePersonalRating(movieId, personalRating);
     }
 
-    /**
-     * Method that uses the MovieManager to retrieve the ID of a movie by its name.
-     */
+    // Method that uses the MovieManager to retrieve the ID of a movie by its name.
     public int getMovieIdByName(String name) throws SQLException {
         return movieManager.getMovieIdByName(name);
     }
@@ -115,9 +105,7 @@ public class MovieModel {
         moviesToBeViewed.setAll(searchResults);
     }
 
-    /**
-     * Method that uses the MovieManager to update the last view date of a movie
-     */
+    // Method that uses the MovieManager to update the last view date of a movie
     public void updateDate(int movieId, Date currentDate) throws Exception {
         movieManager.updateDate(movieId, currentDate);
     }
