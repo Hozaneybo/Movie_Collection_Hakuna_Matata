@@ -9,40 +9,50 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MovieManager {
-    private MovieSearcher movieSercher = new MovieSearcher();
+    // Declare a private variable to store the MovieSearcher object
+    private MovieSearcher movieSearcher = new MovieSearcher();
 
-    IMovieDataAccess movieDAO_DB;
+    // Declare a private variable to store the IMovieDataAccess object
+    private IMovieDataAccess movieDAO;
 
-
+    // Initialize the movieDAO object in the constructor
     public MovieManager() {
-        movieDAO_DB = new MovieDAO();
+        movieDAO = new MovieDAO();
     }
 
-    public List<Movie> getAllMovie() throws SQLException {
-        return movieDAO_DB.getAllMovie();
+    // Method to get all movies from the movieDAO object
+    public List<Movie> getAllMovies() throws SQLException {
+        return movieDAO.getAllMovie();
     }
 
+    // Method to create a movie using the movieDAO object
     public Movie createMovie(String name, String fileLink, double personalRating, double IMDBRating, Date lastView) throws Exception {
-        return movieDAO_DB.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
+        return movieDAO.createMovie(name, fileLink, personalRating, IMDBRating, lastView);
     }
 
-    public void deleteMovie (Movie movie) throws Exception {
-        movieDAO_DB.deleteMovie(movie);
+    // Method to delete a movie using the movieDAO object
+    public void deleteMovie(Movie movie) throws Exception {
+        movieDAO.deleteMovie(movie);
     }
+
+    // Method to search for movies using the movieSearcher object
     public List<Movie> searchMovies(String query) throws Exception {
-        List<Movie> allMovie = getAllMovie();
-        List<Movie> searchResult = movieSercher.search(allMovie, query);
+        List<Movie> allMovies = getAllMovies();
+        List<Movie> searchResult = movieSearcher.search(allMovies, query);
         return searchResult;
     }
+
+    // Method to update the personal rating of a movie using the movieDAO object
     public void updatePersonalRating(int movieId, double personalRating) throws Exception {
-        movieDAO_DB.updatePersonalRating(movieId, personalRating);
+        movieDAO.updatePersonalRating(movieId, personalRating);
     }
-    public void updateDate(int movieId, Date currentDate) throws Exception
-    {
-        movieDAO_DB.updateDate(movieId, currentDate);
+
+    // Method to update the last view date of a movie using the movieDAO object
+    public void updateDate(int movieId, Date currentDate) throws Exception {
+        movieDAO.updateDate(movieId, currentDate);
     }
     public int getMovieIdByName(String name) throws SQLException
     {
-        return movieDAO_DB.getMovieIdByName(name);
+        return movieDAO.getMovieIdByName(name);
     }
 }
