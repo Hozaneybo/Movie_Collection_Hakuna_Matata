@@ -156,13 +156,13 @@ public class MovieViewController extends ControllerManager implements Initializa
 
 
         if(movieModel.getObservableAllMovies().size()!= 0){
-        // Create an alert with the warning message
-        Alert alert = new Alert(Alert.AlertType.WARNING, "Remember to delete movies that have a personal rating under 6 and have not been opened from the application in more than 2 years.");
-        // Get the dialog pane of the alert
-        DialogPane dialogPane = alert.getDialogPane();
-        // Add the CSS file to the dialog pane
-        dialogPane.getStylesheets().add("CSS/scratch.css");
-        alert.showAndWait();}
+            // Create an alert with the warning message
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Remember to delete movies that have a personal rating under 6 and have not been opened from the application in more than 2 years.");
+            // Get the dialog pane of the alert
+            DialogPane dialogPane = alert.getDialogPane();
+            // Add the CSS file to the dialog pane
+            dialogPane.getStylesheets().add("CSS/scratch.css");
+            alert.showAndWait();}
     }
 
     public void showAllMoviesInTable()
@@ -204,6 +204,7 @@ public class MovieViewController extends ControllerManager implements Initializa
             Date lastView = new Date(System.currentTimeMillis());
             try {
                 movieModel.updateDate(tableview.getSelectionModel().getSelectedItem().getId(), lastView);
+                movieModel.getObservableAllMovies();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
