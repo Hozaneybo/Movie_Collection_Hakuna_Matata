@@ -51,6 +51,7 @@ public class AddCategoryController extends ControllerManager {
             addMovieController.setModel(super.getModel());
             addMovieController.showAllMoviesInTable();
             addMovieController.setup();
+            setup();
 
 
             //Closes the window

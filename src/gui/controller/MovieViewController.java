@@ -1,7 +1,5 @@
 package gui.controller;
 
-import be.CatMovie;
-import be.Category;
 import be.Movie;
 import gui.model.CategoryModel;
 import gui.model.MovieModel;
@@ -148,7 +146,6 @@ public class MovieViewController extends ControllerManager implements Initializa
         serch.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 movieModel.searchMovie(newValue);
-                refreshMovieTable();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
