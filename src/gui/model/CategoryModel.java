@@ -16,13 +16,19 @@ public class CategoryModel {
     public CategoryModel() throws SQLException {
         categoryManager = new CategoryManager();
         categoriesToBeViewed = FXCollections.observableArrayList();
-        if(categoryManager.getAllCategories() != null)
-            categoriesToBeViewed.addAll(categoryManager.getAllCategories());
+        if(categoryManager.getAllCategories().size() != 0)
+            categoriesToBeViewed.setAll(categoryManager.getAllCategories());
 
     }
 
     public ObservableList<Category> getObservableAllCategories()
     {
+        categoriesToBeViewed.clear();
+        try {
+            categoriesToBeViewed.setAll(categoryManager.getAllCategories());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return categoriesToBeViewed;
     }
 

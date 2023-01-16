@@ -29,8 +29,8 @@ public class MovieModel {
     public MovieModel() throws SQLException {
         movieManager = new MovieManager();
         moviesToBeViewed = FXCollections.observableArrayList();
-        if(movieManager.getAllMovie() != null){
-            moviesToBeViewed.addAll(movieManager.getAllMovie());}
+        if(movieManager.getAllMovie().size() != 0){
+            moviesToBeViewed.setAll(movieManager.getAllMovie());}
         Comparator<Movie> movieComparator = new Comparator<Movie>() {
             @Override
             public int compare(Movie o1, Movie o2) {
@@ -44,6 +44,12 @@ public class MovieModel {
 
     public ObservableList<Movie> getObservableAllMovies()
     {
+        moviesToBeViewed.clear();
+        try {
+            moviesToBeViewed.setAll(movieManager.getAllMovie());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return moviesToBeViewed;
     }
 

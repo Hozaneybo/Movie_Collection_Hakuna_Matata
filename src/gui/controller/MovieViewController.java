@@ -237,7 +237,7 @@ public class MovieViewController extends ControllerManager implements Initializa
         String rate = txtRate.getText();
         if (!rate.matches("[1-9]|10")) {
             // show an error message or alert to the user
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a number between [1 - 10]");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please give a rate between [1 - 10]");
             // Get the dialog pane of the alert
             DialogPane dialogPane = alert.getDialogPane();
             // Add the CSS file to the dialog pane
@@ -248,6 +248,7 @@ public class MovieViewController extends ControllerManager implements Initializa
         try {
             movieModel.updatePersonalRating(tableview.getSelectionModel().getSelectedItem().getId(), Double.parseDouble(rate));
             txtRate.clear();
+            showAllMoviesInTable();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

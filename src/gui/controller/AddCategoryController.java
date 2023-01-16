@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -37,9 +38,19 @@ public class AddCategoryController extends ControllerManager {
 
         if (!nameField.getText().isEmpty()) {
             try {
+
             //Calls a method from the SongModel
             categoryModel.createCategory(name);
-                setup();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/gui/view/AddMovie.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+
+            AddMovieController addMovieController = loader.getController();
+
+            addMovieController.setModel(super.getModel());
+            addMovieController.showAllMoviesInTable();
+            addMovieController.setup();
 
 
             //Closes the window
