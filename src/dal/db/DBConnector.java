@@ -22,7 +22,7 @@ public class DBConnector {
         dataSource.setServerName("10.176.111.31");
         dataSource.setDatabaseName("Movie_Collection");
         dataSource.setUser("CSe22A_23"); // Type your given username
-        dataSource.setPassword("Mirovanti2"); // Type your given password
+        dataSource.setPassword("****"); // Type your given password
         dataSource.setTrustServerCertificate(true);
         dataSource.setPortNumber(1433); // From school
     }
